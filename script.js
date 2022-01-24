@@ -48,7 +48,7 @@ prompt.get(schema, (err, result) => {
     return messageGenerator();
   }
   console.log('Command-line input received:');
-  console.log(`  Type "message" not ${result.name}`);
+  console.log(`  Type "messages" not ${result.name}`);
 
 });
 
