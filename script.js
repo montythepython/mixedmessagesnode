@@ -1,3 +1,5 @@
+const prompt = require('prompt');
+
 // Generate random message
 const messageGenerator = () => {
   const quotes = {
@@ -21,19 +23,32 @@ function onErr(err) {
   return 1;
 }
 
-const prompt = require('prompt');
+
+
+const schema = {
+  properties: {
+    name: {
+      pattern: /^[a-zA-Z\s\-]+$/,
+      message: 'Name must be only letters, spaces, or dashes',
+      required: true
+    },
+    password: {
+      hidden: true
+    }
+  }
+};
 
 prompt.start();
 
-prompt.get(['input'], (err, result) => {
+prompt.get(schema, (err, result) => {
   if (err) {
     return onErr(err);
   }
-  if(result.input === "messages"){
+  if(result.name === "messages"){
     return messageGenerator();
   }
   console.log('Command-line input received:');
-  console.log(`  Type "message" not ${result.input}`);
+  console.log(`  Type "message" not ${result.name}`);
 
 });
 
